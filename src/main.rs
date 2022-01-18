@@ -1,19 +1,14 @@
-use std::fmt::{Display, Formatter, Result};
+use std::fs::File;
+use std::io::{Read, Write};
 
 fn main() {
-    enum Size {
-        Small, Medium, Large
-    }
+    //let f = File::open("hello.txt").expect("error::::");
+    let f = File::open("hello.txt").unwrap();
 
-    let burger_size = Size::Small;
-
-    let value = match burger_size {
-        Size::Small => { "regular" }
-        Size::Medium => { "classic" }
-        Size::Large => { "family" }
+    let f = match File::open("hello.txt") {
+        Ok(file) => file,
+        Err(e) => panic!("there is an error opening the file, details: {}", e)
     };
 
-    println!("{}", burger_size as u32);
-
-    println!("{}", value);
+    println!("{:?}", f);
 }
